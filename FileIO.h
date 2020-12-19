@@ -3,7 +3,7 @@
   Student ID: 2316808
   Class Name: CPSC 350: Data Structures and Algorithms
   Class Section: 2
-  Assignment Name: Assignment 3
+  Assignment Name: Assignment 6
 */
 
 #include <iostream>
@@ -30,9 +30,8 @@ class FileIO {
     //Method to return the value of counter;
     int getLineNumber();
 
-    //Method to check if the string is a decimal nunber
+    //Method to check if the string is a decimal nunber or integer.
     bool checkIfStringIsDecimalNumber(string tempString);
-
     bool checkIfStringIsNumber(string tempString);
 
   private:

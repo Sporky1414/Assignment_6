@@ -3,7 +3,7 @@
   Student ID: 2316808
   Class Name: CPSC 350: Data Structures and Algorithms
   Class Section: 2
-  Assignment Name: Assignment 3
+  Assignment Name: Assignment 6
 */
 
 #include "FileIO.h"
@@ -50,7 +50,7 @@ FileIO::FileIO(string tempInputFilePath) {
     //Attempts to setup the file reader.
     input.open(inputFilePath);
 
-    //If the file input reader works/sees the file exists, it will end the loop.
+    //If the file input reader works/sees the file exists, it will then check if file is valid. If the file does not, the loop will continue until a valid filePath is entered.
     if(!input.fail()) {
       if(checkFileValidity()) {
         //File is valid, end loop.
@@ -130,26 +130,46 @@ bool FileIO::checkIfStringIsDecimalNumber(string tempString) {
   return isNum;
 }
 
+//Checks if the argument string can be converted to an integer.
 bool FileIO::checkIfStringIsNumber(string tempString) {
+  //Iterates through string to make sure each character can be converted to a digit. If any character is not a digit, false is returned.
   for(int i = 0; i < tempString.length(); ++i) {
     if(!isdigit(tempString[i])) {
       return false;
     }
   }
+  //All characters in the string are digits, so return true.
   return true;
 }
 
 //Checks if file is a valid file for this assignment.
 bool FileIO::checkFileValidity() {
-  if(!checkIfStringIsNumber(readNextLine())) {
+  //First line must be the length of the array containing the data, so it must be an integer. Otherwise, the file is invalid.
+  string tempString = readNextLine();
+  if(!checkIfStringIsNumber(tempString)) {
     return false;
   }
+  //Store the number of doubles into a temporary int. Create a counter to count the number of doubles found.
+  int counter = 0;
+  int numOfDoubles = 0;
+  stringstream numOfDoublesConverter(tempString);
+  numOfDoublesConverter >> numOfDoubles;
+  numOfDoublesConverter.clear();
+  //Remaining data must be doubles, so each line is check to ensure they are doubles and not something else. Otherwise, the file is invalid. Counter is incremented for every double found.
   while(inputHasDataLeft()) {
     if(!checkIfStringIsDecimalNumber(readNextLine())) {
       return false;
+    } else {
+      ++counter;
     }
   }
-  //All file values are doubles. Reset file reader and return TRUE.
+  //The counter, after checking each line, should be the same as numOfDoubles if the file is valid. If this is not the case, the user is alerted of the discreptancy and false is returned.
+  if(counter != numOfDoubles) {
+    cout << "Expected Entries: " << numOfDoubles << endl;
+    cout << "Doubles Found: " << counter << endl;
+    return false;
+  }
+  //File is valid if this point is reached. Reset file reader and return TRUE.
   input.clear();
   input.seekg(0);
   return true;
