@@ -26,7 +26,7 @@ The purpose of this application is to sort through double values (passed in as a
 
 ## Known Errors:
 1. All sorting results also include the amount of time needed to copy the data. Throughout testing (including with 10 million doubles), this did not have any impact on the results of the simulation, but it should be noted anyway.
-1. The file must contain nothing except the one integer at the top and the decimals numbers afterwards. This includes extra lines/spaces at the end of the file.
+1. The file must contain nothing except the one integer at the top and the decimals numbers afterwards. This includes extra lines/spaces at the end of the file. Otherwise, the program will ask you to try a different file.
 
 ## References
 1. Zybooks (All sorting pseudo code except Bubble Sort)
