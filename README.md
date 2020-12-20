@@ -18,6 +18,11 @@ The purpose of this application is to sort through double values (passed in as a
 1. Simulation.h
 1. Sorter.cpp
 1. Sorter.h
+1. Makefile
+
+## Other Files Present
+1. Assignment 6 Write Up.pdf
+1. README.md
 
 ## Known Errors:
 1. All sorting results also include the amount of time needed to copy the data. Throughout testing (including with 10 million doubles), this did not have any impact on the results of the simulation, but it should be noted anyway.
